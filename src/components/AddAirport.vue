@@ -30,13 +30,6 @@
 					class="form-control"
 					v-model="airport.city">
 			</div>
-			<div class="form-group">
-				<label>Tijdszone</label>
-				<input 
-					type="number" 
-					class="form-control"
-					v-model="airport.timezone">
-			</div>
 			<button class="btn btn-sm btn-secondary" @click="toggleForm">Annuleer</button>
 			<button class="btn btn-sm btn-primary" @click="addAirport">Toevoegen</button>
 		</div>
@@ -54,14 +47,13 @@ export default {
 				abbreviation: '',
 				name: '',
 				country: '',
-				city: '',
-				timezone: ''
+				city: ''
 			}
 		}
 	},
 	methods : {
 		addAirport() {
-			airportsRef.push(this.airport)
+			airportsRef.child(this.airport.abbreviation).set(this.airport)
 		},
 		toggleForm() {
 			this.showForm = !this.showForm

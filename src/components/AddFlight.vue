@@ -3,6 +3,13 @@
 		<a class="btn btn-primary btn-add-flight" v-if="!showForm" @click="toggleForm">Vlucht toevoegen</a>
 		<div class="form" v-if="showForm">
 			<div class="form-group">
+				<label>Vluchtnummer</label>
+				<input 
+					type="text" 
+					class="form-control"
+					v-model="flight.number">
+			</div>
+			<div class="form-group">
 				<label>Vertrek vliegveld</label>
 				<select class="form-control" v-model="flight.departure_airport">
 					<option value="0">Kies vertrek vliegveld</option>
@@ -41,11 +48,18 @@
 					v-model="flight.departure_time">
 			</div>
 			<div class="form-group">
-				<label>Vluchtduur</label>
+				<label>Aankomstdatum</label>
+				<input 
+					type="date" 
+					class="form-control"
+					v-model="flight.arrival_date">
+			</div>
+			<div class="form-group">
+				<label>Aankomsttijd</label>
 				<input 
 					type="time" 
 					class="form-control"
-					v-model="flight.flight_duration">
+					v-model="flight.arrival_time">
 			</div>
 			<button class="btn btn-sm btn-secondary" @click="toggleForm">Annuleer</button>
 			<button class="btn btn-sm btn-primary" @click="addFlight">Toevoegen</button>
@@ -61,17 +75,19 @@ export default {
 		return {
 			showForm: false,
 			flight: {
+				number: '',
 				departure_airport: 0,
 				departure_date: '',
 				departure_time: '',
 				arrival_airport: 0,
-				flight_duration: ''
+				arrival_date: '',
+				arrival_time: ''
 			}
 		}
 	},
 	methods : {
 		addFlight() {
-			flightsRef.push(this.flight)
+			flightsRef.child(this.flight.number).set(this.flight)
 		},
 		toggleForm() {
 			this.showForm = !this.showForm

@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+import { flightsRef } from '../firebaseApp'
 
 // Export the mutations to the Vuex store
 export const mutations = {
@@ -17,5 +18,15 @@ export const mutations = {
 	[types.SET_AIRPORTS] (state, airports_payload) {
 		// Set the store's airports to the airports payload
 		state.airports = airports_payload
+	},
+	[types.SET_FLIGHT_TO_BOOK] (state, flight_number_payload) {
+		// Set the store's flight to book
+		flightsRef.child(flight_number_payload).get().then(function(snapshot) {
+			if (snapshot.exists()) {
+				state.flightToBook = snapshot.val()
+			}
+		}).catch(function(error) {
+		  console.error(error);
+		});
 	}
 }

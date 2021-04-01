@@ -2,13 +2,14 @@
 	<div class="flight">
 		<h4 class="card-title">{{flight.departure_airport}} -> {{flight.arrival_airport}}</h4>
 		<p class="card-text">Vertrek: {{flight.departure_date}} {{flight.departure_time}}</p>
-		<p class="card-text">Reistijd: {{flight.flight_duration}}</p>
+		<p class="card-text">Aankomst: {{flight.arrival_date}} {{flight.arrival_time}}</p>
+		<router-link v-if="book" :to="'/boeken/'+flight.number">Boeken</router-link>
 	</div>
 </template>
 
 <script>
 export default {
-	props: ['flight']
+	props: ['flight', 'book']
 }
 </script>
 

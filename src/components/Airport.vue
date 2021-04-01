@@ -2,7 +2,6 @@
 	<div class="airport">
 		<h4 class="card-title">({{airport.abbreviation}}) {{airport.name}}</h4>
 		<p class="card-text">Locatie: {{airport.city}}, {{airport.country}}</p>
-		<p class="card-text">Tijdszone: GMT <span v-if="airport.timezone > 0">+</span>{{airport.timezone}}</p>
 	</div>
 </template>
 

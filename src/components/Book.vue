@@ -1,39 +1,11 @@
 <template>
-	<div>
-		<h2>Boek uw vlucht</h2>
-		<Flight :flight="this.$store.state.flightToBook" />
-		<div class="form">
-			<div class="form-group">
-				<label>Aanhef</label>
-				<input type="radio" id="male" name="aanhef" value="Dhr.">
-				<label for="male">Dhr.</label>
-				<input type="radio" id="female" name="aanhef" value="Mw.">
-				<label for="female">Mw.</label>
-			</div>
-			<div class="form-group">
-				<label>Voornaam</label>
-				<input 
-					type="text" 
-					class="form-control">
-			</div>
-			<div class="form-group">
-				<label>Tussenvoegsel</label>
-				<input 
-					type="text" 
-					class="form-control">
-			</div>
-			<div class="form-group">
-				<label>Achternaam</label>
-				<input 
-					type="text" 
-					class="form-control">
-			</div>
-			<div class="form-group">
-				<label>Geboortedatum</label>
-				<input 
-					type="date" 
-					class="form-control">
-			</div>
+	<div class="book-outer">
+		<div class="book">
+			<h2>Boek uw vlucht: {{passengers}} passagier<span v-if="passengers > 1">s</span></h2>
+			<Flight :flight="this.$store.state.flightToBook" />
+			<Passenger v-for="(passenger, index) in passengersInfo" :passenger="passenger" :key="index" />
+			<button class='btn btn-primary btn-large' @click="confirmBooking">Naar boekingsoverzicht</button>
+			<div class="spacer"></div>
 		</div>
 	</div>
 </template>
@@ -41,27 +13,58 @@
 <script>
 import { flightsRef } from '../firebaseApp'
 import Flight from './Flight.vue'
+import Passenger from './Passenger.vue'
 
 export default {
 	data() {
 		return {
 			flightLoaded: false,
-			flight: []
+			flight: [],
+			passengersInfo: []
 		}
 	},
+	props: ['passengers'],
 	created() {
 		this.$store.dispatch('setFlightToBook', this.$route.params.number)
 	},
+	mounted() {
+		for (var i = 1; i <= this.passengers; i++) {
+			this.passengersInfo.push({
+				index: i,
+				salutation: '1',
+				first_name: '',
+				middle_name: '',
+				last_name: '',
+				date_of_birth: '1990-01-01'
+			});
+		}
+	},
+	methods: {
+		confirmBooking() {
+			this.$store.dispatch('setPassengers', this.passengersInfo)
+			this.$router.push('/bevestigen')
+		}
+	},
 	components: {
-		Flight
+		Flight,
+		Passenger
 	}
 }
 </script>
 
 <style>
-.form {
-	padding: 1rem 2rem;
-	margin: 3rem 0;
+.book-outer {
+	background-image: url("../../src/assets/images/background.jpg");
+	background-size: cover;
+	min-height: 85vh;
+	padding: 10rem 20%;
+}
+
+.book {
+	background-color: white;
+	margin: 0 auto;
+	padding: 2rem;
+	clear: both;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 </style>

@@ -1,64 +1,32 @@
 <template>
-	<div class="form-inline">
-		<h3>Aanmelden</h3>
-		<div class="form-group">
-			<input 
-				type="text" 
-				placeholder="E-mailadres" 
-				class="form-control"
-				v-model="email"
-			>
-			<input 
-				type="password"
-				placeholder="Wachtwoord"
-				class="form-control"
-				v-model="password"
-			>
-			<input 
-				type="password"
-				placeholder="Herhaal wachtwoord"
-				class="form-control"
-				v-model="repeatPassword"
-			>
-			<button 
-				class="btn btn-primary"
-				@click="signUp"
-			>
-				Aanmelden
-			</button>
-			<p>{{error.message}}</p>
-			<router-link to="/inloggen">Heeft u al een account? Log dan in!</router-link>
+	<div class="sign-up-outer">
+		<div class="sign-up">
+			<SignUpForm />
 		</div>
 	</div>
 </template>
 
 <script>
-import { firebaseApp } from '../firebaseApp'
+import SignUpForm from './SignUpForm.vue'
 
 export default {
-	data() {
-		return {
-			email: '',
-			password: '',
-			repeatPassword: '',
-			error: {
-				message: ''
-			}
-		}
-	},
-	methods: {
-		signUp() {
-			// Password check
-			if (this.repeatPassword === this.password) {
-				// Use the firebase auth domain to sign up with email and password
-				firebaseApp.auth().createUserWithEmailAndPassword(this.email, this.password)
-					.catch(error => {
-						this.error = error
-					})
-			} else {
-				alert("Wachtwoorden komen niet overeen")
-			}
-		}
+	components: {
+		SignUpForm
 	}
 }
 </script>
+
+<style>
+.sign-up-outer {
+	padding: 20rem 25%;
+	background-image: url("../../src/assets/images/background.jpg");
+	background-size: cover;
+	min-height: 80vh;
+}
+
+.sign-up {
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	background-color: white;
+	padding: 2rem;
+}
+</style>

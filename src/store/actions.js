@@ -19,3 +19,15 @@ export const setAirports = ({commit}, airports_payload) => {
 export const setFlightToBook = ({commit}, flight_number) => {
 	commit(types.SET_FLIGHT_TO_BOOK, flight_number)
 }
+
+export const setPassengers = ({commit}, passengers_payload) => {
+	commit(types.SET_PASSENGERS, passengers_payload)
+}
+
+export const confirmBooking = ({commit}) => {
+	commit(types.CONFIRM_BOOKING)
+}
+
+export const setBookings = ({commit}) => {
+	commit(types.SET_BOOKINGS)
+}

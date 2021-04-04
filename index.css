@@ -1,8 +1,41 @@
 #app {
-	font-family: 'Avenir', Helvetica, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2C3350;
-	padding: 0 10%;
+	text-align: left;
+	color: #24282A;
+}
+
+.content {
+	padding: 10%;
+}
+
+a {
+	color: #F47B20;
+}
+
+a:hover {
+	color: #F47B20;
+}
+
+.btn.btn-primary {
+	background-color: #F47B20;
+	border-color: #F47B20;
+}
+
+.btn.btn-primary:hover {
+	background-color: #d16718;
+	border-color: #d16718;
+}
+
+.btn-large {
+	float: right;
+	width: 100%;
+	height: 6rem;
+	font-weight: 600;
+	font-size: 2rem;
+}
+
+.spacer {
+	clear: both;
 }

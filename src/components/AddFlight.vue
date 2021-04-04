@@ -61,6 +61,13 @@
 					class="form-control"
 					v-model="flight.arrival_time">
 			</div>
+			<div class="form-group">
+				<label>Zitplekken</label>
+				<input 
+					type="number" 
+					class="form-control"
+					v-model="flight.total_seats">
+			</div>
 			<button class="btn btn-sm btn-secondary" @click="toggleForm">Annuleer</button>
 			<button class="btn btn-sm btn-primary" @click="addFlight">Toevoegen</button>
 		</div>
@@ -81,12 +88,15 @@ export default {
 				departure_time: '',
 				arrival_airport: 0,
 				arrival_date: '',
-				arrival_time: ''
+				arrival_time: '',
+				available_seats: 0,
+				total_seats: 60
 			}
 		}
 	},
 	methods : {
 		addFlight() {
+			this.flight.available_seats = this.flight.total_seats
 			flightsRef.child(this.flight.number).set(this.flight)
 		},
 		toggleForm() {

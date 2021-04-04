@@ -9,7 +9,9 @@ const state = {
 	user: {},
 	flights: [],
 	airports: [],
-	flightToBook: {}
+	flightToBook: {},
+	passengers: [],
+	bookings: []
 }
 
 export default new Vuex.Store({

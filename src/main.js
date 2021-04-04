@@ -13,6 +13,7 @@ import App from './components/App.vue'
 import Home from './components/Home.vue'
 import Bookings from './components/Bookings.vue'
 import Book from './components/Book.vue'
+import Confirmation from './components/Confirmation.vue'
 import Flights from './components/Flights.vue'
 import Airports from './components/Airports.vue'
 import SignIn from './components/SignIn.vue'
@@ -26,7 +27,8 @@ const router = new VueRouter({
 		{ path: '/boekingen', component: Bookings },
 		{ path: '/vluchten', component: Flights },
 		{ path: '/luchthavens', component: Airports },
-		{ path: '/boeken/:number', component: Book, props: true },
+		{ path: '/boeken/:number/:passengers', component: Book, props: true },
+		{ path: '/bevestigen', component: Confirmation },
 		{ path: '/inloggen', component: SignIn },
 		{ path: '/aanmelden', component: SignUp }
 	]
@@ -39,7 +41,9 @@ firebaseApp.auth().onAuthStateChanged(user => {
 		// Dispatch signIn action to save user in the Vuex store
 		store.dispatch('signIn', user)
 		// Push the user to their bookings dashboard
-		router.push('/boekingen')
+		if (router.currentRoute.path !== '/bevestigen') {
+			router.push('/boekingen')
+		}
 	} else {
 		// Replace to erase router history
 		router.replace('/')

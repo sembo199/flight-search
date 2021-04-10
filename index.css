@@ -36,6 +36,15 @@ a:hover {
 	font-size: 2rem;
 }
 
+.flight-abbr {
+	font-weight: 100;
+    font-size: 1.5rem;
+}
+
+.flight-number {
+	color: #925527;
+}
+
 .spacer {
 	clear: both;
 }

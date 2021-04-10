@@ -8,7 +8,8 @@
 			<p class="card-text"><b>Aankomst:</b> {{flight.arrival_date}} {{flight.arrival_time}}</p>
 			<p class="card-text"><b>Zitplaatsen beschikbaar:</b> {{flight.available_seats}}/{{flight.total_seats}}</p>
 			<p v-if="book && flight.available_seats < passengers">Niet genoeg plekken beschikbaar.</p>
-			<router-link class="book-btn" v-if="book && flight.available_seats >= passengers" :to="'/boeken/'+flight.number+'/'+passengers">Boeken</router-link>
+			<router-link v-if="book && flight.available_seats >= passengers" :to="'/boeken/'+flight.number+'/'+passengers"><button class="book-btn">Boeken</button></router-link>
+			<div class="spacer"></div>
 		</div>
 	</div>
 </template>
@@ -32,11 +33,6 @@ export default {
 	padding: 1rem 2rem;
 	background-color: #f47b20;
 	color: white;
-}
-
-.flight-abbr {
-	font-weight: 100;
-    font-size: 1.5rem;
 }
 
 .flight-body {
@@ -81,5 +77,19 @@ export default {
 	line-height: 1.8rem;
 	font-weight: 700;
 	color: #ffffff;
+}
+
+@media screen and (max-width: 1024px) {
+	.flight-body {
+		padding: 2rem;
+	}
+
+	.book-btn {
+		width: calc(100% - 4rem);
+		text-align: center;
+    	font-weight: 700;
+    	position: initial;
+    	width: 100%;
+	}
 }
 </style>

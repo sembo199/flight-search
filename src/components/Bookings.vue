@@ -1,8 +1,7 @@
 <template>
 	<div class="bookings-outer">
 		<div class="bookings">
-			<h1>Uw boekingen</h1>
-
+			<h2>Uw boekingen</h2>
 			<h3 v-if="this.$store.state.bookings.length == 0">U heeft nog geen vluchten geboekt.</h3>
 			<Booking :booking="booking" v-for="(booking, index) in this.$store.state.bookings" :key="index" />
 			<router-link v-if="this.$store.state.user.email == 'sem.ekkelboom@gmail.com'" class="btn btn-primary" to="/vluchten">Vluchten bekijken</router-link>
@@ -39,5 +38,15 @@ export default {
 	padding: 2rem;
 	clear: both;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.bookings h2 {
+	margin: 0 0 2rem;
+}
+
+@media screen and (max-width: 1024px) {
+	.bookings-outer {
+		padding: 5rem 5%;
+	}
 }
 </style>

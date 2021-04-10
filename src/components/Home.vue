@@ -149,4 +149,19 @@ export default {
 	padding: 2rem 20%;
 	background-color: #fcfcfc;
 }
+
+@media screen and (max-width: 1024px) {
+	.flight-finder-outer {
+		padding: 5rem 10% 0;
+	}
+
+	.flights {
+		padding: 2rem 10%;
+	}
+
+	.form-group-half {
+		width: 100%;
+		margin-right: 0;
+	}
+}
 </style>

@@ -47,7 +47,6 @@ export const mutations = {
 	},
 	[types.SET_BOOKINGS] (state) {
 		// Get bookings by uid
-		console.log(state.user.uid)
 		bookingsRef.child(state.user.uid).get().then(function(snapshot) {
 			if (snapshot.exists()) {
 				state.bookings = snapshot.val()

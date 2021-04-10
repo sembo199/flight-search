@@ -47,5 +47,14 @@
 	text-align: right;
 }
 
+@media screen and (max-width: 1024px) {
+	.footer {
+		font-size: 1.2rem;
+	}
 
+	.footer-block-center img {
+		height: 3.5rem;
+	}
+
+}
 </style>

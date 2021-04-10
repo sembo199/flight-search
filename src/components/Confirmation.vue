@@ -77,4 +77,23 @@ export default {
 .column-half:nth-of-type(2n-1) {
 	border-right: 1px solid #d3d3d3;
 }
+
+@media screen and (max-width: 1024px) {
+	.confirmation-outer {
+		padding: 5rem 5%;
+	}
+
+	.form-row {
+		display: block;
+	}
+
+	.column-half {
+		padding: 0;
+	}
+
+	.column-half:nth-of-type(2n-1) {
+		border-bottom: 1px solid #d3d3d3;
+		border-right: 0;
+	}
+}
 </style>

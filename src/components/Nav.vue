@@ -96,4 +96,24 @@ export default {
 	border: 0;
 }
 
+
+@media screen and (max-width: 1024px) {
+	.navbar-inner {
+		flex-direction: column;
+		min-height: 7rem;
+	}
+
+	.navbar .brand img {
+		height: 3rem;
+	}
+
+	.navbar .brand h1 {
+		font-size: 2.2rem;
+		margin: 0;
+	}
+
+	.navbar-link {
+		padding: .8rem 1.3rem;
+	}
+}
 </style>

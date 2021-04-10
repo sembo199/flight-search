@@ -67,4 +67,16 @@ export default {
 	clear: both;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
+@media screen and (max-width: 1024px) {
+	.book-outer {
+		padding: 5rem 5%;
+	}
+
+	.book h2 {
+		font-size: 1.8rem;
+		margin: 0 0 2rem;
+		font-weight: 700;
+	}
+}
 </style>

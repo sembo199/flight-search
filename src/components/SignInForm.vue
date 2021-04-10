@@ -22,7 +22,7 @@
 				Inloggen
 			</button>
 			<p>{{error.message}}</p>
-			<router-link to="/aanmelden">Nog geen account? Meld je aan!</router-link>
+			<router-link v-if="!confirm" to="/aanmelden">Nog geen account? Meld je aan!</router-link>
 		</div>
 	</div>
 </template>

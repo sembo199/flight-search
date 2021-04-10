@@ -28,7 +28,7 @@
 				Aanmelden
 			</button>
 			<p>{{error.message}}</p>
-			<router-link to="/inloggen">Heeft u al een account? Log dan in!</router-link>
+			<router-link v-if="!confirm" to="/inloggen">Heeft u al een account? Log dan in!</router-link>
 		</div>
 	</div>
 </template>

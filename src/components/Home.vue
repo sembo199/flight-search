@@ -7,7 +7,7 @@
 				<div class="form search-form">
 					<div class="form-group form-group-half">
 						<label>Vertrekken vanaf:</label>
-						<input v-model="selectedDeparture" class="form-control" type="text" name="example" list="exampleList">
+						<input @change="resetResults" v-model="selectedDeparture" class="form-control" type="text" name="example" list="exampleList">
 						<datalist id="exampleList">
 						  <option value="">Maak uw keuze</option>
 						  <option :value="airport.abbreviation" v-for="(airport, index) in this.$store.state.airports">{{airport.city}}, {{airport.name}}</option>
@@ -31,19 +31,19 @@
 					</div>
 				</div>
 
-				<a v-if="selectedDeparture !== '' && selectedArrival !== ''" href="#flights"><button class="btn btn-primary btn-large">Bekijk vluchten</button></a>
+				<a v-if="selectedDeparture !== '' && selectedArrival !== ''" href="#flights" @click="calculateFlights"><button class="btn btn-primary btn-large">Bekijk vluchten</button></a>
 				<div class="spacer"></div>
 			</div>
 		</div>
-		<div class="flights" id="flights" v-if="selectedDeparture !== '' && selectedArrival !== ''">
-			<h2>Gevonden vluchten:</h2>
+		<div class="flights" id="flights" v-if="showResults">
+			<h2 v-if="calculatedFlights.length > 0">Gevonden vluchten:</h2>
+			<h2 v-if="calculatedFlights.length <= 0">Er zijn helaas geen vluchten gevonden.</h2>
 			<Flight 
 				:book="true" 
 				:flight="flight" 
 				:passengers="passengers" 
 				:key="index" 
-				v-for="(flight, index) in this.$store.state.flights" 
-				v-if="flight.departure_airport == selectedDeparture && flight.arrival_airport == selectedArrival && selectedDate == flight.departure_date" />
+				v-for="(flight, index) in calculatedFlights" />
 		</div>
 	</div>
 	
@@ -56,14 +56,38 @@ import Flight from './Flight.vue'
 export default {
 	data() {
 		return {
+			showResults: false,
 			selectedDeparture: '',
 			selectedArrival: '',
 			passengers: 1,
-			selectedDate: new Date().toISOString().slice(0,10)
+			selectedDate: new Date().toISOString().slice(0,10),
+			calculatedFlights: []
 		}
 	},
 	methods: {
-		
+		calculateFlights() {
+			let tempFlights = []
+			for (var i = 0; i < this.$store.state.flights.length; i++) {
+				if (this.$store.state.flights[i].departure_date == this.selectedDate
+					&& this.$store.state.flights[i].arrival_airport.abbreviation == this.selectedArrival
+					&& this.$store.state.flights[i].departure_airport.abbreviation == this.selectedDeparture) {
+					// console.log(this.$store.state.flights[i].number + " can be booked")
+					tempFlights.push(this.$store.state.flights[i])
+				}
+			}
+			tempFlights.sort((flightA, flightB) => {
+				if (flightA.departure_time > flightB.departure_time) {
+					return 1
+				} else {
+					return -1
+				}
+			})
+			this.showResults = true
+			this.calculatedFlights = tempFlights
+		},
+		resetResults() {
+			this.showResults = false
+		}
 	},
 	mounted() {
 		// Get any new flights from the db in realtime

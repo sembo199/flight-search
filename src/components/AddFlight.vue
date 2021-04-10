@@ -1,7 +1,7 @@
 <template>
 	<div class="add-flight">
 		<a class="btn btn-primary btn-add-flight" v-if="!showForm" @click="toggleForm">Vlucht toevoegen</a>
-		<div class="form" v-if="showForm">
+		<div class="form add-flight-form" v-if="showForm">
 			<div class="form-group">
 				<label>Vluchtnummer</label>
 				<input 
@@ -11,7 +11,7 @@
 			</div>
 			<div class="form-group">
 				<label>Vertrek vliegveld</label>
-				<select class="form-control" v-model="flight.departure_airport">
+				<select class="form-control" v-model="flight.departure_airport_abbr">
 					<option value="0">Kies vertrek vliegveld</option>
 					<option 
 						v-for="(airport, index) in this.$store.state.airports"
@@ -23,7 +23,7 @@
 			</div>
 			<div class="form-group">
 				<label>Aankomst vliegveld</label>
-				<select class="form-control" v-model="flight.arrival_airport">
+				<select class="form-control" v-model="flight.arrival_airport_abbr">
 					<option value="0">Kies vertrek vliegveld</option>
 					<option 
 						v-for="(airport, index) in this.$store.state.airports"
@@ -83,10 +83,12 @@ export default {
 			showForm: false,
 			flight: {
 				number: '',
-				departure_airport: 0,
+				departure_airport: {},
+				departure_airport_abbr: 0,
 				departure_date: '',
 				departure_time: '',
-				arrival_airport: 0,
+				arrival_airport: {},
+				arrival_airport_abbr: 0,
 				arrival_date: '',
 				arrival_time: '',
 				available_seats: 0,
@@ -97,6 +99,14 @@ export default {
 	methods : {
 		addFlight() {
 			this.flight.available_seats = this.flight.total_seats
+			for (var i = 0; i < this.$store.state.airports.length; i++) {
+				if(this.$store.state.airports[i].abbreviation == this.flight.departure_airport_abbr) {
+					this.flight.departure_airport = this.$store.state.airports[i]
+				}
+				if(this.$store.state.airports[i].abbreviation == this.flight.arrival_airport_abbr) {
+					this.flight.arrival_airport = this.$store.state.airports[i]
+				}
+			}
 			flightsRef.child(this.flight.number).set(this.flight)
 		},
 		toggleForm() {
@@ -122,7 +132,7 @@ export default {
 	margin: 1rem 0;
 }
 
-.form {
+.add-flight-form {
 	padding: 1rem 2rem;
 	margin: 3rem 0;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

@@ -8,14 +8,14 @@
 			<Flight 
 				v-for="(flight, index) in this.$store.state.flights"
 				:flight="flight"
-				key="index"
+				:key="index"
 			/>
 		</div>
 	</div>
 </template>
 
 <script>
-import { firebaseApp, flightsRef } from '../firebaseApp'
+import { airportsRef, firebaseApp, flightsRef } from '../firebaseApp'
 import AddFlight from './AddFlight.vue'
 import Flight from './Flight.vue'
 

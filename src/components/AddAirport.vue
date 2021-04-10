@@ -1,7 +1,7 @@
 <template>
 	<div class="add-airport">
 		<a class="btn btn-primary btn-add-airport" v-if="!showForm" @click="toggleForm">Luchthaven toevoegen</a>
-		<div class="form" v-if="showForm">
+		<div class="form add-airport-form" v-if="showForm">
 			<div class="form-group">
 				<label>Luchthaven naam</label>
 				<input 
@@ -68,7 +68,7 @@ export default {
 	margin: 1rem 0;
 }
 
-.form {
+.add-airport-form {
 	padding: 1rem 2rem;
 	margin: 3rem 0;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

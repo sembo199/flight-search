@@ -16,6 +16,7 @@
 	background: white;
 	margin-bottom: 0;
 	height: 8vh;
+	width: 100%;
 }
 
 .footer {

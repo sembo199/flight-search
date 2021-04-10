@@ -1,6 +1,6 @@
 <template>
 	<div class="booking">
-		<h3>({{booking.flight.number}}) - {{booking.flight.departure_airport}} > {{booking.flight.arrival_airport}}</h3>
+		<h3>({{booking.flight.number}}) - {{booking.flight.departure_airport.city}} > {{booking.flight.arrival_airport.city}}</h3>
 		<p>Vertrek: {{booking.flight.departure_date}} {{booking.flight.departure_time}}</p>
 		<p>Aankomst: {{booking.flight.arrival_date}} {{booking.flight.arrival_time}}</p>
 		<h4>Passagiers</h4>

@@ -4,6 +4,7 @@
 			<h2>Boek uw vlucht: {{passengers}} passagier<span v-if="passengers > 1">s</span></h2>
 			<Flight :flight="this.$store.state.flightToBook" />
 			<Passenger v-for="(passenger, index) in passengersInfo" :passenger="passenger" :key="index" />
+			<p class="error-message">{{error.message}}</p>
 			<button class='btn btn-primary btn-large' @click="confirmBooking">Naar boekingsoverzicht</button>
 			<div class="spacer"></div>
 		</div>
@@ -20,7 +21,10 @@ export default {
 		return {
 			flightLoaded: false,
 			flight: [],
-			passengersInfo: []
+			passengersInfo: [],
+			error: {
+				message: ''
+			}
 		}
 	},
 	props: ['passengers'],
@@ -28,21 +32,35 @@ export default {
 		this.$store.dispatch('setFlightToBook', this.$route.params.number)
 	},
 	mounted() {
-		for (var i = 1; i <= this.passengers; i++) {
-			this.passengersInfo.push({
-				index: i,
-				salutation: '1',
-				first_name: '',
-				middle_name: '',
-				last_name: '',
-				date_of_birth: '1990-01-01'
-			});
+		if (this.$store.state.passengers.length == this.passengers) {
+			this.passengersInfo = this.$store.state.passengers
+		} else {
+			for (var i = 1; i <= this.passengers; i++) {
+				this.passengersInfo.push({
+					index: i,
+					salutation: '1',
+					first_name: '',
+					middle_name: '',
+					last_name: '',
+					date_of_birth: '1990-01-01'
+				});
+			}
 		}
 	},
 	methods: {
 		confirmBooking() {
-			this.$store.dispatch('setPassengers', this.passengersInfo)
-			this.$router.push('/bevestigen')
+			let valid = true
+			for (var i = 0; i < this.passengersInfo.length; i++) {
+				if (this.passengersInfo[i].first_name == '' || this.passengersInfo[i].last_name == '') {
+					valid = false;
+				}
+			}
+			if (valid) {
+				this.$store.dispatch('setPassengers', this.passengersInfo)
+				this.$router.push('/bevestigen')
+			} else {
+				this.error.message = "Niet alle verplichte velden zijn ingevoerd."
+			}
 		}
 	},
 	components: {
@@ -54,7 +72,7 @@ export default {
 
 <style>
 .book-outer {
-	background-image: url("../../src/assets/images/background.jpg");
+	background-image: url("../../src/assets/images/background1.jpg");
 	background-size: cover;
 	min-height: 85vh;
 	padding: 10rem 20%;
@@ -66,6 +84,11 @@ export default {
 	padding: 2rem;
 	clear: both;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.error-message {
+	color: #c43232;
+	font-weight: 600;
 }
 
 @media screen and (max-width: 1024px) {

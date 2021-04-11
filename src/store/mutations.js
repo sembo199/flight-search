@@ -44,6 +44,8 @@ export const mutations = {
 		}
 		const now = new Date()
 		bookingsRef.child(state.user.uid+"/"+state.flightToBook.number+"-"+now.getTime()).set(booking)
+		state.passengers = []
+		state.flightToBook = {}
 	},
 	[types.SET_BOOKINGS] (state) {
 		// Get bookings by uid

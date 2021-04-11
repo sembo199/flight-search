@@ -26,7 +26,7 @@ export default {
 
 <style>
 .bookings-outer {
-	background-image: url("../../src/assets/images/background.jpg");
+	background-image: url("../../src/assets/images/background3.jpg");
 	background-size: cover;
 	min-height: 85vh;
 	padding: 10rem 20%;

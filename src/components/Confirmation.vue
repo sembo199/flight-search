@@ -3,7 +3,7 @@
 		<div class="confirmation">
 			<h2>Bevestig uw boeking</h2>
 			<Flight :flight="this.$store.state.flightToBook" />
-			<Passenger v-for="(passenger, index) in this.$store.state.passengers" :confirm="true" :passenger="passenger" :key="index" />
+			<Passenger v-for="(passenger) in this.$store.state.passengers" :confirm="true" :passenger="passenger" />
 			<div class="form-row" v-if="!this.$store.state.user.email">
 				<SignInForm class="column-half" :confirm="true" />
 				<SignUpForm class="column-half" :confirm="true" />
@@ -22,11 +22,6 @@ import SignInForm from './SignInForm.vue'
 import SignUpForm from './SignUpForm.vue'
 
 export default {
-	data() {
-		return {
-			userIsSet: false
-		}
-	},
 	components: {
 		Flight,
 		Passenger,
@@ -37,12 +32,6 @@ export default {
 		confirmBooking() {
 			this.$store.dispatch('confirmBooking')
 			this.$router.replace('/boekingen')
-		},
-		userIsSet() {
-			for(var key in this.$store.state.user) {
-		        if(obj.hasOwnProperty(key))
-		            return false;
-		    }
 		}
 	}
 }
@@ -50,7 +39,7 @@ export default {
 
 <style>
 .confirmation-outer {
-	background-image: url("../../src/assets/images/background.jpg");
+	background-image: url("../../src/assets/images/background3.jpg");
 	background-size: cover;
 	min-height: 85vh;
 	padding: 10rem 20%;

@@ -19,7 +19,7 @@ export default {
 <style>
 .sign-up-outer {
 	padding: 20rem 25%;
-	background-image: url("../../src/assets/images/background.jpg");
+	background-image: url("../../src/assets/images/background4.jpg");
 	background-size: cover;
 	min-height: 80vh;
 }

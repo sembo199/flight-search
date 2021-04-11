@@ -10,7 +10,7 @@
 						<input @change="resetResults" v-model="selectedDeparture" class="form-control" type="text" name="example" list="exampleList">
 						<datalist id="exampleList">
 						  <option value="">Maak uw keuze</option>
-						  <option :value="airport.abbreviation" v-for="(airport, index) in this.$store.state.airports">{{airport.city}}, {{airport.name}}</option>
+						  <option :value="airport.abbreviation" v-for="(airport, index) in this.$store.state.airports">{{airport.name}} - {{airport.city}}, {{airport.country}}</option>
 						</datalist>
 					</div>
 					<div class="form-group form-group-half">
@@ -18,7 +18,7 @@
 						<input v-model="selectedArrival" class="form-control" type="text" name="example" list="exampleList">
 						<datalist id="exampleList">
 						  <option value="">Maak uw keuze</option>
-						  <option :value="airport.abbreviation" v-for="(airport, index) in this.$store.state.airports">{{airport.city}}, {{airport.name}}</option>
+						  <option :value="airport.abbreviation" v-for="(airport, index) in this.$store.state.airports">{{airport.name}} - {{airport.city}}, {{airport.country}}</option>
 						</datalist>
 					</div>
 					<div class="form-group form-group-half">
@@ -114,7 +114,7 @@ export default {
 
 <style>
 .flight-finder-outer {
-	background-image: url("../../src/assets/images/background.jpg");
+	background-image: url("../../src/assets/images/background5.jpg");
 	background-size: cover;
 	min-height: 85vh;
 	padding: 20rem 20% 0;
@@ -146,7 +146,7 @@ export default {
 }
 
 .flights {
-	padding: 2rem 20%;
+	padding: 5rem 20%;
 	background-color: #fcfcfc;
 }
 

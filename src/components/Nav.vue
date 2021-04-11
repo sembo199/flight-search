@@ -27,6 +27,7 @@ import { firebaseApp } from '../firebaseApp'
 export default {
 	methods: {
 		signOut() {
+			// Sign out the user
 			this.$store.dispatch('signOut')
 			firebaseApp.auth().signOut()
 		}

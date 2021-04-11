@@ -31,10 +31,11 @@ export const mutations = {
 		});
 	},
 	[types.SET_PASSENGERS] (state, passengers_payload) {
+		// Set the passengers for the flight to book
 		state.passengers = passengers_payload;
 	},
 	[types.CONFIRM_BOOKING] (state) {
-		// Todo first check if there is still enough available seats
+		// Remove the seats from the flight's available seats
 		state.flightToBook.available_seats -= state.passengers.length
 		flightsRef.child(state.flightToBook.number).set(state.flightToBook)
 		let booking = {
@@ -43,12 +44,14 @@ export const mutations = {
 			passengers: state.passengers
 		}
 		const now = new Date()
+		// Add the booking by it's flight number and current datetime so multiple bookings for the same flight can be made
 		bookingsRef.child(state.user.uid+"/"+state.flightToBook.number+"-"+now.getTime()).set(booking)
+		// Reset the passengers and flight to book for new bookings
 		state.passengers = []
 		state.flightToBook = {}
 	},
 	[types.SET_BOOKINGS] (state) {
-		// Get bookings by uid
+		// Get bookings by user's id
 		bookingsRef.child(state.user.uid).get().then(function(snapshot) {
 			if (snapshot.exists()) {
 				state.bookings = snapshot.val()

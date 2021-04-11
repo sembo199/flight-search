@@ -98,8 +98,11 @@ export default {
 	},
 	methods : {
 		addFlight() {
+			// Set the available seats to the total amount of seats on the flight
 			this.flight.available_seats = this.flight.total_seats
+			// Loop through the airports in the store
 			for (var i = 0; i < this.$store.state.airports.length; i++) {
+				// If the abbreviation of the airport matches either the departure or arrival airport, add them to the flight information
 				if(this.$store.state.airports[i].abbreviation == this.flight.departure_airport_abbr) {
 					this.flight.departure_airport = this.$store.state.airports[i]
 				}
@@ -107,9 +110,11 @@ export default {
 					this.flight.arrival_airport = this.$store.state.airports[i]
 				}
 			}
+			// Add the new flight to the realtime db
 			flightsRef.child(this.flight.number).set(this.flight)
 		},
 		toggleForm() {
+			// Toggle the forms visibility
 			this.showForm = !this.showForm
 		}
 	},

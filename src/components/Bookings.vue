@@ -16,6 +16,7 @@ import Booking from './Booking.vue'
 
 export default {
 	mounted() {
+		// Set the bookings for the current user
 		this.$store.dispatch('setBookings')
 	},
 	components: {

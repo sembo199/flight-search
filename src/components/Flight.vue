@@ -16,6 +16,7 @@
 
 <script>
 export default {
+	// Fetch the properties from the component
 	props: ['flight', 'book', 'passengers']
 }
 </script>

@@ -8,7 +8,7 @@
 				<SignInForm class="column-half" :confirm="true" />
 				<SignUpForm class="column-half" :confirm="true" />
 			</div>
-			<p v-if="this.$store.state.user.email">Aangemeld als {{this.$store.state.user.email}}</p>
+			<p v-if="this.$store.state.user.email">Aangemeld als {{this.$store.state.user.email}}.</p>
 			<button v-if="this.$store.state.user.email" @click="confirmBooking" class="btn btn-primary btn-large">Bevestig boeking</button>
 			<div class="spacer"></div>
 		</div>
@@ -30,6 +30,7 @@ export default {
 	},
 	methods: {
 		confirmBooking() {
+			// save the booking
 			this.$store.dispatch('confirmBooking')
 			this.$router.replace('/boekingen')
 		}

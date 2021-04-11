@@ -66,15 +66,18 @@ export default {
 	},
 	methods: {
 		calculateFlights() {
+			// Function to calculate which flights match the users search params
 			let tempFlights = []
 			for (var i = 0; i < this.$store.state.flights.length; i++) {
+				// Check if the date, dep. and arr. airport match
 				if (this.$store.state.flights[i].departure_date == this.selectedDate
 					&& this.$store.state.flights[i].arrival_airport.abbreviation == this.selectedArrival
 					&& this.$store.state.flights[i].departure_airport.abbreviation == this.selectedDeparture) {
-					// console.log(this.$store.state.flights[i].number + " can be booked")
+					// Add them to a temporary flights array
 					tempFlights.push(this.$store.state.flights[i])
 				}
 			}
+			// Sort flights by departure time
 			tempFlights.sort((flightA, flightB) => {
 				if (flightA.departure_time > flightB.departure_time) {
 					return 1
@@ -82,10 +85,12 @@ export default {
 					return -1
 				}
 			})
-			this.showResults = true
 			this.calculatedFlights = tempFlights
+			// Enable showing the results
+			this.showResults = true
 		},
 		resetResults() {
+			// Disable the results if any search params change
 			this.showResults = false
 		}
 	},
@@ -98,6 +103,7 @@ export default {
 			})
 			this.$store.dispatch('setFlights', flights)
 		})
+		// Get any new airports from the db in realtime
     	airportsRef.on('value', snap => {
 			let airports = []
 			snap.forEach(airport => {

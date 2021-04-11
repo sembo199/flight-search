@@ -29,13 +29,18 @@ export default {
 	},
 	props: ['passengers'],
 	created() {
+		// Set the flight to book in the store by its flight number
 		this.$store.dispatch('setFlightToBook', this.$route.params.number)
 	},
 	mounted() {
+		// If the amount of passengers corresponds to the store's passengers size
 		if (this.$store.state.passengers.length == this.passengers) {
+			// Use the store's passenger information, to edit existing passengers
 			this.passengersInfo = this.$store.state.passengers
 		} else {
+			// If not, the store is reset or a new flight/passenger amount was chosen
 			for (var i = 1; i <= this.passengers; i++) {
+				// Push placeholder data to the passengersInfo array
 				this.passengersInfo.push({
 					index: i,
 					salutation: '1',
@@ -49,6 +54,7 @@ export default {
 	},
 	methods: {
 		confirmBooking() {
+			// First check if all required fields are set
 			let valid = true
 			for (var i = 0; i < this.passengersInfo.length; i++) {
 				if (this.passengersInfo[i].first_name == '' || this.passengersInfo[i].last_name == '') {
@@ -56,9 +62,11 @@ export default {
 				}
 			}
 			if (valid) {
+				// All required fields set, go to confirmation page
 				this.$store.dispatch('setPassengers', this.passengersInfo)
 				this.$router.push('/bevestigen')
 			} else {
+				// Not all required fields are set, show error message
 				this.error.message = "Niet alle verplichte velden zijn ingevoerd."
 			}
 		}

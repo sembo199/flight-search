@@ -16,6 +16,7 @@
 
 <script>
 export default {
+	// Fetch the booking from the component's properties
 	props: ['booking']
 }
 </script>

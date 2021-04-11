@@ -53,9 +53,11 @@ export default {
 	},
 	methods : {
 		addAirport() {
+			// Add the new airport to the realtime db
 			airportsRef.child(this.airport.abbreviation).set(this.airport)
 		},
 		toggleForm() {
+			// Toggle the forms visibility
 			this.showForm = !this.showForm
 		}
 	}

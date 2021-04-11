@@ -7,6 +7,7 @@
 
 <script>
 export default {
+	// Fetch the airport from the component's properties
 	props: ['airport']
 }
 </script>

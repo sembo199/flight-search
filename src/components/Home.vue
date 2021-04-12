@@ -14,7 +14,7 @@
 						</datalist>
 					</div>
 					<div class="form-group form-group-half">
-						<label>Vertrekken vanaf:</label>
+						<label>Vertrekken naar:</label>
 						<input v-model="selectedArrival" class="form-control" type="text" name="example" list="exampleList">
 						<datalist id="exampleList">
 						  <option value="">Maak uw keuze</option>
